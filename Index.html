@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation - Nintendo Games API</title>
+    <style>
+
+        /* General Page Styling */
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #F2F2F2;
+            color: #333;
+            text-align: center;
+        }
+
+        h1, h2 {
+            font-family: 'Nintendo', sans-serif;
+            color: #E60012;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #0066cc;
+            font-size: 1.6em;
+        }
+
+        h3 {
+            color: #FFB6C1;
+        }
+
+        .highlight {
+            color: #FF4136;
+            font-weight: bold;
+        }
+
+        /* Center Content */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #E60012;
+            padding: 20px;
+            color: white;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2,5em;
+        }
+
+        .project-info {
+            background-color: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-info p {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .project-info ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .project-info ul li {
+            padding: 8px;
+            margin: 5px;
+            background-color: #e7f3fe;
+            border-radius: 5px;
+        }
+
+        .endpoint {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        pre, code {
+            background-color: #f7f7f7;
+            padding: 10px;
+            border-radius: 5px;
+            color: #333;
+            font-size: 1.1em;
+            line-height: 1.5em;
+            word-wrap: break-word;
+            margin-top: 10px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+        }
+
+        footer h3 {
+            margin-top: 0;
+        }
+
+        .error {
+            background-color: #FF4136;
+            color: white;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+
+        .request-response {
+            background-color: #F1F1F1;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        /* Nintendo font */
+        @font-face {
+            font-family: 'Nintendo';
+            src: url('https://fontlibrary.org/face/nintendo') format('truetype');
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Node.js API Documentation for Nintendo Games</h1>
+        <p>Your gateway to the world of Nintendo games! 🎮</p>
+    </header>
+
+    <div class="container">
+        <div class="project-info">
+            <h2>About the Project</h2>
+            <p><strong>Assignment 2 - Web Development - .NET Cloud Developer</strong></p>
+            <p>This project involves creating two APIs that communicate with each other:</p>
+            <ul>
+                <li><strong>.NET API:</strong> A minimal API built using .NET 8, hosted on Azure, 
+                    with CRUD operations and connected to a Mongo database via Mongo Driver. 
+                    The API also includes SwaggerUI for documentation.</li>
+                <li><strong>Express API:</strong> An Express API built using Node.js, 
+                    which makes requests to the .NET API, retrieves data, and displays it through a basic UI. 
+                    The Express API also includes endpoints to add data to the .NET API.</li>
+            </ul>
+            <p>The APIs communicate to provide a seamless integration, 
+                where the Express API retrieves and sends data to/from the .NET API, 
+                demonstrating interaction between the two services hosted on different platforms.</p>
+        </div>
+
+        <h2>API Endpoints</h2>
+        <p>Retrieve information about Nintendo games via the API. Below are the available endpoints:</p>
+
+        <!-- Get All Games -->
+        <div class="endpoint">
+            <h3>GET /games</h3>
+            <p>Fetch a list of all Nintendo games from the database.</p>
+            <div class="request-response">
+                <strong>Request:</strong>
+                <code>GET /games</code>
+            </div>
+            <div class="request-response">
+                <strong>Response:</strong>
+                <pre>
+[
+    {
+        "id": "60c72b2f5f1b2c001f8b4567",
+        "name": "Super Mario Odyssey",
+        "genre": "Platform",
+        "releaseYear": 2017,
+        "developer": "Nintendo"
+    },
+    {
+        "id": "60c72b2f5f1b2c001f8b4568",
+        "name": "The Legend of Zelda: Breath of the Wild",
+        "genre": "Adventure",
+        "releaseYear": 2017,
+        "developer": "Nintendo"
+    }
+]
+                </pre>
+            </div>
+        </div>
+
+        <!-- Get Game by Name -->
+        <div class="endpoint">
+            <h3>GET /game/:name</h3>
+            <p>Retrieve a specific Nintendo game by its name from the database.</p>
+            <div class="request-response">
+                <strong>Request:</strong>
+                <code>GET /game?name=Super%20Mario%20Odyssey
+                </code>
+            </div>
+            <div class="request-response">
+                <strong>Response:</strong>
+                <pre>
+{
+    "id": "60c72b2f5f1b2c001f8b4567",
+    "name": "Super Mario Odyssey",
+    "genre": "Platform",
+    "releaseYear": 2017,
+    "developer": "Nintendo"
+}
+                </pre>
+            </div>
+            <div class="request-response">
+                <strong>Possible Errors:</strong>
+                <ul>
+                    <li><strong>404:</strong> Game with the given name not found.</li>
+                    <li><strong>400:</strong> Invalid request (e.g., malformed query or missing parameters).</li>
+                    <li><strong>500:</strong> Server error when connecting to the .NET API.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Add New Game -->
+        <div class="endpoint">
+            <h3>POST /game</h3>
+            <p>Add a new game to the database through the .NET API.</p>
+            <div class="request-response">
+                <strong>Request:</strong>
+                <code>POST /game</code>
+                <p>Headers:</p>
+                <pre>
+        Content-Type: application/json
+                </pre>
+                <p>Body:</p>
+                <pre>
+{
+    "name": "Super Mario Odyssey",
+    "genre": "Platform",
+    "releaseYear": 2017,
+    "developer": "Nintendo"
+}
+                </pre>
+            </div>
+            <div class="request-response">
+                <strong>Response:</strong>
+                <pre>
+Game successfully added to the .NET API!
+                </pre>
+            </div>
+            <div class="request-response">
+                <strong>Possible Errors:</strong>
+                <ul>
+                    <li><strong>400:</strong> Missing required fields (name, genre, releaseYear, developer).</li>
+                     <li><strong>500:</strong> Error connecting to the .NET API.</li>
+                    <li><strong>Other status codes:</strong> Forwarded from the .NET API if the request fails.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Error Handling -->
+        <div class="error">
+            <h3>Error Handling</h3>
+            <p>If the API encounters an error, you will receive an appropriate HTTP status code and error message:</p>
+            <ul>
+                <li><strong>404:</strong> Game not found for the given name.</li>
+                <li><strong>400:</strong> Invalid or malformed request.</li>
+                <li><strong>500:</strong> Server issues or database connection errors.</li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -9,7 +9,7 @@ app.use(express.json()); // Parse JSON request body
 
 // Allow requests from your UI's origin
 app.use(cors({
-    origin: 'http://127.0.0.1:5500', // or your frontend URL
+    origin: 'http://127.0.0.1:5500', 
 }));
 
 // Use the environment variable
@@ -77,15 +77,15 @@ app.post('/game', (req, res) => {
     }
 
     const newGame = { name, genre, releaseYear, developer };
-    const newGameJson = JSON.stringify(newGame); // ✅ Fix: Convert to JSON
+    const newGameJson = JSON.stringify(newGame); 
 
     const options = {
-        hostname: new URL(DOTNET_API_URL).hostname, // ✅ Fix: Use DOTNET_API_URL dynamically
+        hostname: new URL(DOTNET_API_URL).hostname, 
         path: '/game',  
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Content-Length': Buffer.byteLength(newGameJson) // ✅ Fix: Correct Content-Length
+            'Content-Length': Buffer.byteLength(newGameJson) 
         }
     };
 
